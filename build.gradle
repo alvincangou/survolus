@@ -1,6 +1,8 @@
 plugins {
     id "fi.jasoft.plugin.vaadin" version "1.1.12"
     id 'org.springframework.boot' version '2.0.2.RELEASE'
+    id "io.spring.dependency-management" version "1.0.5.RELEASE"
+
 
 }
 group 'com.miage.survolus'
@@ -8,7 +10,7 @@ version '1.0-SNAPSHOT'
 
 //apply plugin: 'java'
 apply plugin: 'war'
-
+apply plugin: org.springframework.boot.gradle.plugin.SpringBootPlugin
 sourceCompatibility = 1.8
 
 repositories {
@@ -16,9 +18,87 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile("org.springframework.data:spring-data-jpa:1.11.1.RELEASE")
-    compile("org.springframework.boot:spring-boot:1.2.5.RELEASE")
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.0.2.RELEASE'
+  //uselesse  compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.0'
+     compile group: 'com.vaadin.tapio', name: 'googlemaps', version: '2.1.0'
 
+   //ajaxLoader compile group: 'com.github.branflake2267', name: 'gwt-maps-api', version: '3.9.0-build-16'
+
+    /* compile(group: 'com.vaadin.tapio', name: 'googlemaps', version: '2.0.0'){
+    //  exclude group: 'javax.validation'
+        //  exclude group: 'javax.annotation'
+         // exclude group: 'com.vaadin'
+  }*/
+//TEST
+
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    //compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
+  //   compile group: 'com.google.gwt', name: 'gwt-user', version: '2.8.0'
+    //compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.2-b02'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'  //TEST exclude group: 'javax.annotation'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.0.2.RELEASE'//exclude group: 'javax.annotation'
+    //compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.2.Final'
+
+    //compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
+    //a activer pour widgetset
+   //compile group: 'javax.validation', name: 'validation-api', version: '1.0.0.GA'
+   // compile group: 'javax.annotation', name: 'javax.annotation-api',version: '1.0.0.GA'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+   // compile("org.springframework.data:spring-data-jpa:1.11.1.RELEASE")
+    //compile("org.springframework.boot:spring-boot:1.2.5.RELEASE")
+    //compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.0.2.RELEASE'
+    //TEST
+    compile group: 'com.vaadin', name: 'vaadin-server', version: '8.3.1'
+    compile group: 'com.github.appreciated',name:'material',version: '1.1.8'//TEST exclude group: 'javax.annotation'
+   // compile group: 'com.vaadin',name:'vaadin-spring-boot-starter'
+    //compile group: 'com.vaadin',name:'vaadin-bom',version: '8.3.1'
+   // compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("com.vaadin:vaadin-spring-boot-starter:3.0.0")
+   // testCompile("org.springframework.boot:spring-boot-starter-test")
+    compile('org.ow2.asm:asm-all:5.0.3')
+    compile("org.springframework.boot:spring-boot-starter-web")
+
+    // les dépendances dans la config providedRuntime sont packagés lors de la task bootRepackage dans WEB-INF/provides-lib
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.0.2.RELEASE'
+  //  compile 'org.springframework.security:spring-security-core:4.0.1.RELEASE'
+  //  compile 'org.springframework.security:spring-security-config:4.0.1.RELEASE'
+  //  compile 'org.springframework.security:spring-security-web:4.0.1.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.0.5.RELEASE'
+    // Vaadin
+    compile("com.vaadin:vaadin-spring-boot-starter:1.0.0.beta3")
+    compile("com.vaadin:vaadin-client:8.3.1"){
+
+      //  exclude group: 'javax.validation'
+       // exclude group: 'com.vaadin.external.gwt',  module: 'gwt-user'
+       // exclude module: 'javax.annotation'
+      //  exclude group: 'javax.annotation'
+      //  exclude group: 'javax.validation'
+    }
+
+  //uselesse compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.0'
+}
+/*task bootableWar(type: BootRepackage, dependsOn: war) {
+    dependsOn('vaadinCompile')
+    dependsOn('vaadinThemeCompile')
+}*/
+vaadin {
+    version '8.3.1'
+   /* vaadinCompile {
+        widgetset 'WidgetSet'
+        outputDirectory "${rootDir}/build/classes/java/main/"
+        extraInherits 'com.vaadin.tapio.googlemaps.Widgetset'
+        manageWidgetset false
+    }*/
+    vaadinSuperDevMode {
+        server 'jetty'
+    }
+    vaadinRun {
+    }
+    dependencyManagement {
+        imports {
+            mavenBom 'com.vaadin:vaadin-bom:8.3.1'
+        }
+    }
 }

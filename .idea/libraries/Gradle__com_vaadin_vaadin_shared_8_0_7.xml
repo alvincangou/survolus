@@ -4,6 +4,8 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vaadin/vaadin-shared/8.0.7/32b3cb5e5efd20f50087d37d6ba2d476072f32f5/vaadin-shared-8.0.7.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vaadin/vaadin-shared/8.0.7/f1c337f95cb4a949201a57f6dca85dab8081e374/vaadin-shared-8.0.7-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

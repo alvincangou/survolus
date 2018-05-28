@@ -1,0 +1,152 @@
+@import "variables.scss";
+@import "../valo/valo.scss";
+
+$v-included-components: remove($v-included-components, button);
+$v-included-components: remove($v-included-components, panel);
+
+@import "functions.scss";
+@import "materialize/globals.scss";
+@import "components/v-window.scss";
+@import "components/v-panel.scss";
+@import "ripple/ripple.scss";
+@import "components/v-button.scss";
+@import "components/v-textfield.scss";
+@import "components/v-filterselect.scss";
+@import "components/v-progressbar.scss";
+@import "components/v-accordion.scss";
+@import "components/v-menubar.scss";
+@import "components/v-datefield.scss";
+@import "components/v-label.scss";
+@import "components/v-textarea.scss";
+@import "components/v-csslayout.scss";
+@import "components/v-table.scss";
+@import "components/v-grid.scss";
+@import "components/v-select-twincol.scss";
+@import "components/v-checkbox.scss";
+@import "components/v-radiobutton.scss";
+@import "components/v-splitpanel.scss";
+@import "components/v-tabsheet.scss";
+@import "components/v-window.scss";
+@import "components/v-loading.scss";
+@import "components/v-notification.scss";
+@import "components/v-upload.scss";
+@import "components/v-tooltip.scss";
+@import "components/v-colorpicker.scss";
+@import "components/v-menu.scss";
+@import "components/v-app-loading.scss";
+@import "scrollbar.scss";
+
+@import "cards.scss";
+@mixin material {
+  @include valo;
+  @include functions;
+  @include globals;
+  @include cards;
+  @include ripple;
+  @include v-button;
+  @include v-textfield;
+  @include v-filterselect;
+  @include v-progressbar;
+  @include v-accordion;
+  @include v-menubar;
+  @include v-datefield;
+  @include v-label;
+  @include v-textarea;
+  @include v-table;
+  @include v-grid;
+  @include v-select-twincol;
+  @include v-checkbox;
+  @include v-radiobutton;
+  @include v-splitpanel;
+  @include v-tabsheet;
+  @include v-window;
+  @include v-csslayout;
+  @include v-loading;
+  @include v-notification;
+  @include v-upload;
+  @include v-tooltip;
+  @include v-colorpicker;
+  @include v-menu;
+  @include v-app-loading;
+
+  @include valo-panel($include-additional-styles: true);
+
+  .v-menubar{
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    cursor: pointer;
+    height: 45px;
+    padding: 0 20px;
+    color: #1a1a1a;
+    font-weight: 500;
+    cursor: default;
+    border-radius: 2px;
+    border: 0 solid #b2b2b2;
+    background: white;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+    padding: 0;
+    text-align: left;
+    line-height: 45px;
+  }
+
+  .v-menubar:not(.primary):not(.borderless):not(.custom):not(.v-menubar-user-menu) {
+    background: transparent;
+    color: black !important;
+  }
+
+  .v-margin-top {
+     padding-top: 0px;
+  }
+  .v-margin-left {
+    padding-left: 0px;
+  }
+  .v-margin-right{
+    padding-right: 0px;
+  }
+  .v-menubar > .v-menubar-menuitem {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 45px;
+    padding: 0 19px;
+    color: #ffd902;;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 0;
+    border: 0 solid #b2b2b2;
+    background: white;
+    background: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-width: 0 0 0 0;
+    border-color: inherit;
+    height: 100%;
+    line-height: inherit;
+    vertical-align: top;
+    text-align: center;
+    margin-right: 1px;
+  }
+  div.v-layout.v-horizontal.v-widget {
+    white-space: nowrap;
+    background: #2d3033;
+  }
+  .v-image{
+    margin-top:10px
+  }
+  .v-menubar > .v-menubar-menuitem:hover {
+    zoom: 1;
+    color: lightyellow !important;
+  }
+  .v-slot-alvin{
+    height: 80px !important;
+  }
+  .v-menubar >.v-menubar-menuitem-highlight{
+    color:white;
+  }
+}

@@ -1,2 +1,2 @@
-rootProject.name = 'survolus'
-
+include 'addon'
+include 'demo'

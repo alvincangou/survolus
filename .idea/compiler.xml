@@ -2,6 +2,10 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="addon_main" target="1.7" />
+      <module name="addon_test" target="1.7" />
+      <module name="demo_main" target="1.8" />
+      <module name="demo_test" target="1.8" />
       <module name="survolus_main" target="1.8" />
       <module name="survolus_test" target="1.8" />
     </bytecodeTargetLevel>
