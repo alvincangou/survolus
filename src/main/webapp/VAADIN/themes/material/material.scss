@@ -149,4 +149,9 @@ $v-included-components: remove($v-included-components, panel);
   .v-menubar >.v-menubar-menuitem-highlight{
     color:white;
   }
+  .v-verticallayout  .v-verticallayout .v-label{
+    padding-left: 15px;
+    font-weight:bolder;
+    font-size:25px
+  }
 }
