@@ -16,11 +16,12 @@ public class GPSLayout extends VerticalLayout {
   public GPSLayout(){
   }
   public void init(List<Module> modules, TriggeredRepository repositoryt) {
-
+      this.setStyleName("GPSprofile");
       this.setSizeFull();
       googleMap = new GoogleMap(null, null, null);
       googleMap.setCenter(new LatLon(16.2239362, -61.5311338));
-
+googleMap.setSizeFull();
+googleMap.setHeight("600px");
       for (Module module:modules){
 
 
@@ -29,7 +30,7 @@ public class GPSLayout extends VerticalLayout {
                   60.450403, 22.230399), false, null);*/
 
           googleMap.addMarker(t.getModule().getPhonename() + " Déclanchement " + t.getDate() + "-" + t.getModule().getId(), new LatLon(
-                  Double.parseDouble(t.getLaditude()), Double.parseDouble(t.getLongitude())), false, null);
+                  Double.parseDouble(t.getLaditude()), Double.parseDouble(t.getLongitude())), false, "https://i.imgur.com/vUbslYY.png");
 
 
       }
