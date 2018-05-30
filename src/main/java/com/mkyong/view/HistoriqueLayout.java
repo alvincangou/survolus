@@ -44,7 +44,7 @@ verticalLayout.setSizeUndefined();
     Grid<Histo> grid= new Grid();
     grid.setItems(histos);
     grid.setSizeFull();
-    grid.addColumn(Histo::getPhonename).setCaption("smatphone");
+    grid.addColumn(Histo::getPhonename).setCaption("Smartphone");
     grid.addColumn(Histo::getDate).setCaption("Date");
     grid.addColumn(Histo::getLaditude).setCaption("Latitude");
     grid.addColumn(Histo::getLongitude).setCaption("Longitude");

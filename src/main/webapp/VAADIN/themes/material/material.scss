@@ -92,6 +92,7 @@ $v-included-components: remove($v-included-components, panel);
     padding: 0;
     text-align: left;
     line-height: 45px;
+    margin-top: 10px;
   }
 
   .v-menubar:not(.primary):not(.borderless):not(.custom):not(.v-menubar-user-menu) {
@@ -115,7 +116,7 @@ $v-included-components: remove($v-included-components, panel);
     box-sizing: border-box;
     height: 45px;
     padding: 0 19px;
-    color: #ffd902;;
+    color: #ffd902;
     font-weight: 500;
     cursor: pointer;
     border-radius: 0;
@@ -134,7 +135,6 @@ $v-included-components: remove($v-included-components, panel);
   }
   div.v-layout.v-horizontal.v-widget {
     white-space: nowrap;
-    background: #2d3033;
   }
   .v-image{
     margin-top:10px
@@ -162,21 +162,90 @@ $v-included-components: remove($v-included-components, panel);
     text-align: center;
     background-color: white;
     margin: 15px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
   }
 
   .v-verticallayout-boxprofile {
-    width: 500px !important;
+    width: 70% !important;
     padding: 15px;
     text-align: center;
+    background-color: sandybrown;
+    color: white;
+    border-radius: 4px;
+    margin-left: 10px;
   }
+
   .v-verticallayout-layoutprofile{
     text-align:center;
   }
   .v-verticallayout-ModuleLayout{
     background-color: gainsboro;
-    height: 600px;
+  }
+  .v-panel-content-panelmodule{
+    background-color: gainsboro;
+    height: 517px;
+    max-height: 550px;
+  }
+  .v-horizontallayout-footer{
+    background: #2d3033;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: #829191;
+    text-align: center;
+  }
+  .v-layout.v-vertical > .v-expand, .v-layout.v-horizontal > .v-expand {
+    box-sizing: border-box;
+    width: 100%;
+    height: 102%;
+  }
+  .v-slot-GPSprofile{
+    text-align:  center;
+    background-color: gainsboro;
+  }
+  .v-verticallayout-GPSprofile{
+    background-color:  white;
+    padding:  20px;
+    border-radius:  4px;
+    width: 50% !important;
+  }
+  .v-horizontallayout-alvin{
+    background: #2d3033;
+  }
+  .v-panel-content-panelprofile{
+    height: 550px;
+    max-height: 550px;
+  }
+  .v-verticallayout .v-verticallayout .v-label-top {
+    padding-left: 15px;
+    font-weight: bolder;
+    font-size: 25px;
+    margin-left: 50px;
+  }
+  .v-panel-content-panelgps {
+    max-height:218px
   }
 
+  .v-slot-GPSprofile {
+    padding-top: 15px;
+    text-align: center;
+    background-color: gainsboro;
+    height: 550px;
+    max-height: 550px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  }
+  .v-panel-content-panelhisto{
+    max-height:550px;
+  }
 
-
+  .v-horizontallayout-deconexion {
+    text-align: right;
+    padding-top: 12px;
+  }
+  .v-button{
+    margin-right:20px
+  }
 }

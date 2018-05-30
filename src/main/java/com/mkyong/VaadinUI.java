@@ -12,6 +12,7 @@ import com.mkyong.view.ModuleLayout;
 import com.mkyong.view.ProfileLayout;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.*;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
@@ -68,8 +69,6 @@ public class VaadinUI extends UI {
         repositoryt.saveAndFlush(triggered3);
 */
 
-        Window main=  new Window();
-
 
 
        // final VerticalLayout layout = new VerticalLayout();
@@ -112,23 +111,30 @@ image.setHeight("200px");
             throw new Exception("Login failed!");
 
         } else {
+           /*Module module = new Module("Samsung A5", user, null);
+            repositorym.saveAndFlush(module);
+            Module module2 = new Module("Alcatel 3x", user, null);
+            repositorym.saveAndFlush(module2);
+            Module module3 = new Module("Wiko Wim LITE", user, null);
+            repositorym.saveAndFlush(module3);*/
 usernames=username;
 passwords=password;
            ;
             getUI().setContent(new Label("2 view"));
             this.setSizeFull();
             VerticalLayout layout = new VerticalLayout();
-
+            MenuBar mainMenuBar = new MenuBar();
             VerticalLayout content = new VerticalLayout();
             layout.setSizeFull();
             setContent(layout);
 
-            MenuBar mainMenuBar = new MenuBar();
+
             MenuBar.Command mycommandprofile = new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
                     content.removeAllComponents();
-                    content.addComponent(new Label("Vue : "+selectedItem.getText()    ));
+                    content.addComponent(new Label(selectedItem.getText()    ));
+                    content.getComponent(0).setStyleName("top");
                     ProfileLayout profileLayout =new ProfileLayout();
                     profileLayout.init(repositoryu.findAllByLoginAndPassword(usernames,passwords));
                     content.addComponent(profileLayout);
@@ -143,7 +149,8 @@ passwords=password;
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
                     content.removeAllComponents();
-                    content.addComponent(new Label("Vue : "+selectedItem.getText()));
+                    content.addComponent(new Label(selectedItem.getText()));
+                    content.getComponent(0).setStyleName("top");
                     ModuleLayout moduleLayout = new ModuleLayout();
                     moduleLayout.init(repositorym.findByUtilisateur(user));
                     content.addComponent(moduleLayout);
@@ -158,7 +165,8 @@ passwords=password;
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
                     content.removeAllComponents();
-                    content.addComponent(new Label("Vue : "+selectedItem.getText()));
+                    content.addComponent(new Label(selectedItem.getText()));
+                    content.getComponent(0).setStyleName("top");
                     HistoriqueLayout historiqueLayout= new HistoriqueLayout();
                     historiqueLayout.init(repositorym.findByUtilisateur(repositoryu.findAllByLoginAndPassword(usernames,passwords).get(0)),repositoryt);
                     content.addComponent(historiqueLayout);
@@ -172,7 +180,8 @@ passwords=password;
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
                     content.removeAllComponents();
-                    content.addComponent(new Label("Vue : "+selectedItem.getText()    ));
+                    content.addComponent(new Label(selectedItem.getText()    ));
+                    content.getComponent(0).setStyleName("top");
                     GPSLayout gpsLayout = new GPSLayout();
                     gpsLayout.init(repositorym.findByUtilisateur(repositoryu.findAllByLoginAndPassword(usernames,passwords).get(0)),repositoryt);
                    content.addComponent(gpsLayout);
@@ -185,20 +194,43 @@ passwords=password;
             };
             mainMenuBar.addItem("Mon profile",mycommandprofile);
             mainMenuBar.addItem("Modules", mycommandmodule);
-            mainMenuBar.addItem("historique",mycommandhistorique);
+            mainMenuBar.addItem("Historique",mycommandhistorique);
             mainMenuBar.addItem("GPS",mycommandGPS);
 
 
 
+//Initial Content
             HorizontalLayout header = new HorizontalLayout();
             header.addStyleName("alvin");
             header.setId("header");
             header.setWidth("100%");
             header.setHeight("80px");
             layout.addComponent(header);
+            content.removeAllComponents();
+            content.addComponent(new Label("Mon profile"   ));
+            content.getComponent(0).setStyleName("top");
+            ProfileLayout profileLayout =new ProfileLayout();
+            profileLayout.init(repositoryu.findAllByLoginAndPassword(usernames,passwords));
+            content.addComponent(profileLayout);
+            for (MenuBar.MenuItem item: mainMenuBar.getItems()) {
+                item.setStyleName("none");
+            }
+            mainMenuBar.getItems().get(0).setStyleName("highlight");
+//inital content end
             layout.addComponent(content);
-
-            // logo survolus
+            layout.setExpandRatio(content,0.8f);
+            HorizontalLayout footer = new HorizontalLayout();
+            footer.setStyleName("footer");
+            footer.setSizeFull();
+           /* Resource resf = new ThemeResource("images/survolusico.png");
+            Image imagef= new Image("",resf);
+            imagef.setHeight("80px");
+            imagef.setWidth("80px");
+            footer.addComponent(imagef);
+            footer.setExpandRatio(imagef,0.1f);*/
+            footer.addComponent(new Label("© 2018 Survolus co. All rights reserved."));
+            layout.addComponent(footer);
+            layout.setExpandRatio(footer,0.2f);
             Resource res = new ThemeResource("images/survolusico2.png");
             Image image = new Image(null, res);
             image.setHeight("40px");
@@ -207,11 +239,43 @@ passwords=password;
 
             // menu principal
             header.addComponent(mainMenuBar);
-            header.setExpandRatio(mainMenuBar, 1.0f);
+            header.setExpandRatio(mainMenuBar, 0.8f);
+            HorizontalLayout déconexion = new HorizontalLayout();
+            déconexion.setSizeFull();
+            déconexion.setStyleName("deconexion");
+
+            Button deco = new Button();
+            deco.setIcon(VaadinIcons.SIGN_OUT);
+            deco.setStyleName("deco");
+            deco.addClickListener(new Button.ClickListener() {
+                public void buttonClick(Button.ClickEvent event) {
+                     VerticalLayout layout1 = new VerticalLayout();
+                    Image image = new Image("",resource);
+                    image.setHeight("200px");
+                    image.setWidth("200px");
+                    final TextField name = new TextField();
+                    name.setCaption("Type your name here:");
+                    final TextField password = new TextField();
+                    password.setCaption("Type your password here:");
+                    Button button = new Button("Connect");
+                    button.addClickListener( e -> {
+                        layout1.addComponent(new Label("Trying to connect user : " + name.getValue()));
+                        try {
+                            authenticate(name.getValue(),password.getValue());
+                        } catch (Exception e1) {
+                            e1.printStackTrace(); } });
+                    layout1.addComponents(image,name,password, button);
+                    layout1.setComponentAlignment(image,Alignment.MIDDLE_CENTER);
+                    layout1.setComponentAlignment(name, Alignment.MIDDLE_CENTER);
+                    layout1.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
+                    layout1.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
+                    UI.getCurrent().setContent(layout1);
+                }
+            });
+            déconexion.addComponent(deco);
+            header.addComponent(déconexion);
+            header.setExpandRatio(déconexion, 0.2f);
+
         }
     }
-    // tag::listCustomers[]
-
-    // end::listCustomers[]
-
 }
