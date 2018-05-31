@@ -41,6 +41,15 @@ public class VaadinUI extends UI {
 
     private String passwords;
 
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+    Utilisateur utilisateur;
 
     Resource resource = new ThemeResource("images/survolusico.png");
 
@@ -68,8 +77,6 @@ public class VaadinUI extends UI {
         repositoryt.saveAndFlush(triggered2);
         repositoryt.saveAndFlush(triggered3);
 */
-
-
 
        // final VerticalLayout layout = new VerticalLayout();
      //   FileResource resource = new FileResource(new File("src/main/resources/survolusico.png"));
@@ -117,9 +124,10 @@ image.setHeight("200px");
             repositorym.saveAndFlush(module2);
             Module module3 = new Module("Wiko Wim LITE", user, null);
             repositorym.saveAndFlush(module3);*/
-usernames=username;
-passwords=password;
-           ;
+           usernames=username;
+           passwords=password;
+           utilisateur=user;
+
             getUI().setContent(new Label("2 view"));
             this.setSizeFull();
             VerticalLayout layout = new VerticalLayout();
@@ -152,7 +160,7 @@ passwords=password;
                     content.addComponent(new Label(selectedItem.getText()));
                     content.getComponent(0).setStyleName("top");
                     ModuleLayout moduleLayout = new ModuleLayout();
-                    moduleLayout.init(repositorym.findByUtilisateur(user));
+                    moduleLayout.init(repositorym.findByUtilisateur(user),repositorym,user);
                     content.addComponent(moduleLayout);
                     for (MenuBar.MenuItem item: mainMenuBar.getItems()) {
                         item.setStyleName("none");

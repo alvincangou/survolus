@@ -23,7 +23,7 @@ public class Module {
     @JoinColumn(name="idutilisateur")
     private Utilisateur utilisateur;
 
-    @OneToMany(mappedBy = "module",fetch =FetchType.EAGER)
+    @OneToMany(mappedBy = "module",fetch =FetchType.EAGER,orphanRemoval=true)
     private List<Triggered> triggered;
 
     public Module() {

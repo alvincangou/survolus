@@ -8,11 +8,13 @@ import com.mkyong.repositories.TriggeredRepository;
 import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.tapio.googlemaps.client.LatLon;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class GPSLayout extends VerticalLayout {
     private GoogleMap googleMap;
@@ -58,6 +60,16 @@ Grid<Histo> grid= new Grid();
       grid.addColumn(Histo::getDate).setCaption("Date");
       grid.addColumn(Histo::getLaditude).setCaption("Latitude");
       grid.addColumn(Histo::getLongitude).setCaption("Longitude");
+      histos.forEach(grid::select);
+      grid.addSelectionListener(event -> {
+          Set<Histo> selected = event.getAllSelectedItems();
+          googleMap.clearMarkers();
+          for (Histo h : selected) {
+              googleMap.addMarker(h.getPhonename() + " Déclanchement " + h.getDate() , new LatLon(
+                      Double.parseDouble(h.getLaditude()), Double.parseDouble(h.getLongitude())), false, "https://i.imgur.com/vUbslYY.png");
+          }
+          Notification.show(selected.size() + " items selected");
+      });
 panel.setContent(grid);
 this.addComponent(panel);
 
