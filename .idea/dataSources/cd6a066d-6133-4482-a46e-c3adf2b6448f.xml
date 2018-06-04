@@ -3960,65 +3960,70 @@
       <Position>3</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="875" parent="87" name="FK748k72w3w33u19prfd0ygcj19">
+    <column id="875" parent="87" name="MAC">
+      <Position>4</Position>
+      <DataType>char(12)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="876" parent="87" name="FK748k72w3w33u19prfd0ygcj19">
       <ColNames>idutilisateur</ColNames>
     </index>
-    <key id="876" parent="87" name="PRIMARY">
+    <key id="877" parent="87" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="877" parent="88" name="id">
+    <column id="878" parent="88" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="878" parent="88" name="date">
+    <column id="879" parent="88" name="date">
       <Position>2</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <column id="879" parent="88" name="laditude">
+    <column id="880" parent="88" name="laditude">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="880" parent="88" name="longitude">
+    <column id="881" parent="88" name="longitude">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="881" parent="88" name="idmodule">
+    <column id="882" parent="88" name="idmodule">
       <Position>5</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="882" parent="88" name="FKi0tbf2v7oqf53qu7jtvgismhm">
+    <index id="883" parent="88" name="FKi0tbf2v7oqf53qu7jtvgismhm">
       <ColNames>idmodule</ColNames>
     </index>
-    <key id="883" parent="88" name="PRIMARY">
+    <key id="884" parent="88" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="884" parent="89" name="id">
+    <column id="885" parent="89" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="885" parent="89" name="firstname">
+    <column id="886" parent="89" name="firstname">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="886" parent="89" name="lastname">
+    <column id="887" parent="89" name="lastname">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="887" parent="89" name="login">
+    <column id="888" parent="89" name="login">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="888" parent="89" name="password">
+    <column id="889" parent="89" name="password">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <key id="889" parent="89" name="PRIMARY">
+    <key id="890" parent="89" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

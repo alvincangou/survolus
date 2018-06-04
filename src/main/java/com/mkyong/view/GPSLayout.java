@@ -28,7 +28,7 @@ public class GPSLayout extends VerticalLayout {
       panel.setStyleName("panelgps");
       this.setStyleName("GPSprofile");
       this.setSizeFull();
-      googleMap = new GoogleMap(null, null, null);
+      googleMap = new GoogleMap(apiKey, null, null);
       googleMap.setCenter(new LatLon(16.2239362, -61.5311338));
 googleMap.setSizeFull();
 googleMap.setHeight("600px");

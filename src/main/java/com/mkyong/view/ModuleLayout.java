@@ -59,6 +59,7 @@ repositorym.deleteById(id);*/
     this.setContent(gridLayout);
 }
     public  GridLayout refreshedlayout(List<Module>modules,ModuleRepository repositorym,Utilisateur user){
+        GridLayout gridLayoutr = new GridLayout(3,1);
         int i=0;
         int j=0;
         for (Module module : modules) {
@@ -90,10 +91,10 @@ repositorym.deleteById(id);*/
             if (i>2) {
                 i=0;
                 j++;}
-            gridLayout.setRows(j+1);
-            gridLayout.addComponent(box,i,j);
+            gridLayoutr.setRows(j+1);
+            gridLayoutr.addComponent(box,i,j);
             i++;
         }
-        return gridLayout;
+        return gridLayoutr;
     }
 }

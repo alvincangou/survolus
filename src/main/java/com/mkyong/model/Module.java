@@ -17,7 +17,18 @@ public class Module {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(columnDefinition="CHAR(12)")
     private String phonename;
+
+    public String getMAC() {
+        return MAC;
+    }
+
+    public void setMAC(String MAC) {
+        this.MAC = MAC;
+    }
+
+    private String MAC;
 
     @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name="idutilisateur")
