@@ -95,6 +95,7 @@ repositorym.deleteById(id);*/
             gridLayoutr.addComponent(box,i,j);
             i++;
         }
+
         return gridLayoutr;
     }
 }

@@ -6,10 +6,7 @@ import com.mkyong.model.Utilisateur;
 import com.mkyong.repositories.ModuleRepository;
 import com.mkyong.repositories.TriggeredRepository;
 import com.mkyong.repositories.UtilisateurRepository;
-import com.mkyong.view.GPSLayout;
-import com.mkyong.view.HistoriqueLayout;
-import com.mkyong.view.ModuleLayout;
-import com.mkyong.view.ProfileLayout;
+import com.mkyong.view.*;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.icons.VaadinIcons;
@@ -80,14 +77,22 @@ public class VaadinUI extends UI {
 
        // final VerticalLayout layout = new VerticalLayout();
      //   FileResource resource = new FileResource(new File("src/main/resources/survolusico.png"));
+        HorizontalLayout horizontal = new HorizontalLayout();
 Image image = new Image("",resource);
 image.setHeight("200px");
         image.setWidth("200px");
         final TextField name = new TextField();
-        name.setCaption("Type your name here:");
+        name.setCaption("Type your login here:");
 
         final TextField password = new TextField();
         password.setCaption("Type your password here:");
+
+        final Button inscription = new Button();
+        inscription.setCaption("Inscription");
+        inscription.setIcon(VaadinIcons.USERS);
+        inscription.addClickListener( e -> {
+        setContent(new Inscription(repositoryu));
+        });
 
         Button button = new Button("Connect");
         button.addClickListener( e -> {
@@ -99,17 +104,19 @@ image.setHeight("200px");
                 e1.printStackTrace();
             }
         });
-
-        layout.addComponents(image,name,password, button);
+horizontal.addComponents(button,inscription);
+        layout.addComponents(image,name,password, horizontal);
         layout.setComponentAlignment(image,Alignment.MIDDLE_CENTER);
         layout.setComponentAlignment(name, Alignment.MIDDLE_CENTER);
         layout.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
-        layout.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
+        layout.setComponentAlignment(horizontal, Alignment.MIDDLE_CENTER);
+        /*horizontal.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
+        horizontal.setComponentAlignment(inscription,Alignment.MIDDLE_CENTER);*/
         setContent(layout);
 
 
     }
-    private void authenticate(String username, String password) throws Exception {
+    public void authenticate(String username, String password) throws Exception {
         List<Utilisateur> users = repositoryu.findAllByLoginAndPassword(username,password);
       Utilisateur user=users.get(0);
 
@@ -257,14 +264,22 @@ image.setHeight("200px");
             deco.setStyleName("deco");
             deco.addClickListener(new Button.ClickListener() {
                 public void buttonClick(Button.ClickEvent event) {
+
+                    HorizontalLayout horizontal = new HorizontalLayout();
                      VerticalLayout layout1 = new VerticalLayout();
                     Image image = new Image("",resource);
                     image.setHeight("200px");
                     image.setWidth("200px");
                     final TextField name = new TextField();
-                    name.setCaption("Type your name here:");
+                    name.setCaption("Type your login here:");
                     final TextField password = new TextField();
                     password.setCaption("Type your password here:");
+                    final Button inscription = new Button();
+                    inscription.setCaption("Inscription");
+                    inscription.setIcon(VaadinIcons.USERS);
+                    inscription.addClickListener( e -> {
+                        UI.getCurrent().setContent(new Inscription(repositoryu));
+                    });
                     Button button = new Button("Connect");
                     button.addClickListener( e -> {
                         layout1.addComponent(new Label("Trying to connect user : " + name.getValue()));
@@ -272,11 +287,12 @@ image.setHeight("200px");
                             authenticate(name.getValue(),password.getValue());
                         } catch (Exception e1) {
                             e1.printStackTrace(); } });
-                    layout1.addComponents(image,name,password, button);
+                    horizontal.addComponents(button,inscription);
+                    layout1.addComponents(image,name,password, horizontal);
                     layout1.setComponentAlignment(image,Alignment.MIDDLE_CENTER);
                     layout1.setComponentAlignment(name, Alignment.MIDDLE_CENTER);
                     layout1.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
-                    layout1.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
+                    layout1.setComponentAlignment(horizontal, Alignment.MIDDLE_CENTER);
                     UI.getCurrent().setContent(layout1);
                 }
             });
