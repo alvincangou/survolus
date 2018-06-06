@@ -14370,7 +14370,6 @@ body:not(.v-touch) .card-hoverable:hover, body.v-touch .card-hoverable:active {
 	background-color: white;
 	padding: 20px;
 	border-radius: 4px;
-	width: 50% !important;
 }
 
 .material .v-horizontallayout-alvin {

@@ -77,7 +77,7 @@ public class VaadinUI extends UI {
 
        // final VerticalLayout layout = new VerticalLayout();
      //   FileResource resource = new FileResource(new File("src/main/resources/survolusico.png"));
-        HorizontalLayout horizontal = new HorizontalLayout();
+      /*  HorizontalLayout horizontal = new HorizontalLayout();
 Image image = new Image("",resource);
 image.setHeight("200px");
         image.setWidth("200px");
@@ -110,9 +110,10 @@ horizontal.addComponents(button,inscription);
         layout.setComponentAlignment(name, Alignment.MIDDLE_CENTER);
         layout.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
         layout.setComponentAlignment(horizontal, Alignment.MIDDLE_CENTER);
-        /*horizontal.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
+        *//*horizontal.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
         horizontal.setComponentAlignment(inscription,Alignment.MIDDLE_CENTER);*/
-        setContent(layout);
+
+        setContent(getLogin());
 
 
     }
@@ -207,7 +208,7 @@ horizontal.addComponents(button,inscription);
                     selectedItem.setStyleName("highlight");
                 }
             };
-            mainMenuBar.addItem("Mon profile",mycommandprofile);
+            mainMenuBar.addItem("Mon profil",mycommandprofile);
             mainMenuBar.addItem("Modules", mycommandmodule);
             mainMenuBar.addItem("Historique",mycommandhistorique);
             mainMenuBar.addItem("GPS",mycommandGPS);
@@ -222,7 +223,7 @@ horizontal.addComponents(button,inscription);
             header.setHeight("80px");
             layout.addComponent(header);
             content.removeAllComponents();
-            content.addComponent(new Label("Mon profile"   ));
+            content.addComponent(new Label("Mon profil"   ));
             content.getComponent(0).setStyleName("top");
             ProfileLayout profileLayout =new ProfileLayout();
             profileLayout.init(repositoryu.findAllByLoginAndPassword(usernames,passwords));
@@ -265,7 +266,7 @@ horizontal.addComponents(button,inscription);
             deco.addClickListener(new Button.ClickListener() {
                 public void buttonClick(Button.ClickEvent event) {
 
-                    HorizontalLayout horizontal = new HorizontalLayout();
+               /*     HorizontalLayout horizontal = new HorizontalLayout();
                      VerticalLayout layout1 = new VerticalLayout();
                     Image image = new Image("",resource);
                     image.setHeight("200px");
@@ -292,8 +293,8 @@ horizontal.addComponents(button,inscription);
                     layout1.setComponentAlignment(image,Alignment.MIDDLE_CENTER);
                     layout1.setComponentAlignment(name, Alignment.MIDDLE_CENTER);
                     layout1.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
-                    layout1.setComponentAlignment(horizontal, Alignment.MIDDLE_CENTER);
-                    UI.getCurrent().setContent(layout1);
+                    layout1.setComponentAlignment(horizontal, Alignment.MIDDLE_CENTER);*/
+                    UI.getCurrent().setContent(getLogin());
                 }
             });
             déconexion.addComponent(deco);
@@ -301,5 +302,40 @@ horizontal.addComponents(button,inscription);
             header.setExpandRatio(déconexion, 0.2f);
 
         }
+    }
+
+    public VerticalLayout getLogin() {
+        HorizontalLayout horizontal = new HorizontalLayout();
+        Resource resource = new ThemeResource("images/survolusico.png");
+VerticalLayout verticalLayout = new VerticalLayout();
+        Image image = new Image("",resource);
+        image.setHeight("200px");
+        image.setWidth("200px");
+        final TextField name = new TextField();
+        name.setCaption("Type your login here:");
+        final PasswordField password = new PasswordField();
+        password.setCaption("Type your password here:");
+
+        final Button inscription = new Button();
+        inscription.setCaption("Inscription");
+        inscription.setIcon(VaadinIcons.USERS);
+        inscription.addClickListener( e -> {
+            UI.getCurrent().setContent(new Inscription(repositoryu));
+        });
+        Button button = new Button("Connect");
+        button.addClickListener( e -> {
+            verticalLayout.addComponent(new Label("Trying to connect user : " + name.getValue()));
+            try {
+                authenticate(name.getValue(),password.getValue());
+            } catch (Exception e1) {
+                e1.printStackTrace(); } });
+        horizontal.addComponents(button,inscription);
+        verticalLayout.addComponents(image,name,password, horizontal);
+       verticalLayout.setComponentAlignment(image,Alignment.MIDDLE_CENTER);
+        verticalLayout.setComponentAlignment(name, Alignment.MIDDLE_CENTER);
+        verticalLayout.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
+        verticalLayout.setComponentAlignment(horizontal, Alignment.MIDDLE_CENTER);
+
+return  verticalLayout;
     }
 }

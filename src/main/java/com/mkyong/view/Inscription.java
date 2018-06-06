@@ -2,6 +2,7 @@ package com.mkyong.view;
 
 import com.mkyong.model.Utilisateur;
 import com.mkyong.repositories.UtilisateurRepository;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.Page;
 import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
@@ -14,7 +15,7 @@ public class Inscription extends VerticalLayout {
 
     public Inscription(UtilisateurRepository repositoryu) {
 
-
+HorizontalLayout horizontalLayout = new HorizontalLayout();
         Image image = new Image("",resource);
         image.setHeight("200px");
         image.setWidth("200px");
@@ -41,13 +42,25 @@ public class Inscription extends VerticalLayout {
         });
 
 
-        this.addComponents(image,name,password,firstname,lastname, button);
+        Button cancel = new Button("ANNULER");
+        cancel.setStyleName("CANCEL");
+        cancel.setIcon(VaadinIcons.CLOSE_SMALL);
+        cancel.addClickListener( e -> {
+            try {
+                Page.getCurrent().reload();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
+
+horizontalLayout.addComponents(button,cancel);
+        this.addComponents(image,name,password,firstname,lastname,horizontalLayout);
         this.setComponentAlignment(image,Alignment.MIDDLE_CENTER);
         this.setComponentAlignment(name, Alignment.MIDDLE_CENTER);
         this.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
         this.setComponentAlignment(firstname, Alignment.MIDDLE_CENTER);
         this.setComponentAlignment(lastname, Alignment.MIDDLE_CENTER);
-        this.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
+        this.setComponentAlignment(horizontalLayout, Alignment.MIDDLE_CENTER);
     }
 
     public void inscription(String login, String passwordValue, String firstnameValue, String lastnameValue, UtilisateurRepository repositoryu){
