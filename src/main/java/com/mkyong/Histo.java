@@ -2,16 +2,26 @@ package com.mkyong;
 
 public class Histo {
 
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    private Long Id;
   private String Phonename;
   private String Date;
   private String Laditude;
   private String Longitude;
 
-    public Histo(String phonename, String date, String laditude, String longitude) {
+    public Histo(Long id ,String phonename, String date, String laditude, String longitude) {
         Phonename = phonename;
         Date = date;
         Laditude = laditude;
         Longitude = longitude;
+        Id = id;
     }
 
     public String getPhonename() {

@@ -8,6 +8,7 @@ import com.mkyong.repositories.TriggeredRepository;
 import com.mkyong.repositories.UtilisateurRepository;
 import com.mkyong.view.*;
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.*;
@@ -22,8 +23,10 @@ import java.util.Date;
 import java.util.List;
 @Widgetset("AppWidgetset")
 @Theme("material")
+@Title("Survolus")
 @SpringUI
 public class VaadinUI extends UI {
+
     public VerticalLayout layout = new VerticalLayout();
     @Autowired
     UtilisateurRepository repositoryu;
@@ -75,46 +78,12 @@ public class VaadinUI extends UI {
         repositoryt.saveAndFlush(triggered3);
 */
 
-       // final VerticalLayout layout = new VerticalLayout();
-     //   FileResource resource = new FileResource(new File("src/main/resources/survolusico.png"));
-      /*  HorizontalLayout horizontal = new HorizontalLayout();
-Image image = new Image("",resource);
-image.setHeight("200px");
-        image.setWidth("200px");
-        final TextField name = new TextField();
-        name.setCaption("Type your login here:");
-
-        final TextField password = new TextField();
-        password.setCaption("Type your password here:");
-
-        final Button inscription = new Button();
-        inscription.setCaption("Inscription");
-        inscription.setIcon(VaadinIcons.USERS);
-        inscription.addClickListener( e -> {
-        setContent(new Inscription(repositoryu));
-        });
-
-        Button button = new Button("Connect");
-        button.addClickListener( e -> {
-            layout.addComponent(new Label("Trying to connect user : " + name.getValue()));
-
-            try {
-                authenticate(name.getValue(),password.getValue());
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-        });
-horizontal.addComponents(button,inscription);
-        layout.addComponents(image,name,password, horizontal);
-        layout.setComponentAlignment(image,Alignment.MIDDLE_CENTER);
-        layout.setComponentAlignment(name, Alignment.MIDDLE_CENTER);
-        layout.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
-        layout.setComponentAlignment(horizontal, Alignment.MIDDLE_CENTER);
-        *//*horizontal.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
-        horizontal.setComponentAlignment(inscription,Alignment.MIDDLE_CENTER);*/
-
-        setContent(getLogin());
-
+        boolean isLoggedIn = VaadinService.getCurrentRequest().getWrappedSession().getAttribute("utilisateur") != null;
+if(isLoggedIn == false) {
+    setContent(getLogin());
+}else {
+refresh();
+}
 
     }
     public void authenticate(String username, String password) throws Exception {
@@ -126,12 +95,17 @@ horizontal.addComponents(button,inscription);
             throw new Exception("Login failed!");
 
         } else {
+
+
            /*Module module = new Module("Samsung A5", user, null);
             repositorym.saveAndFlush(module);
             Module module2 = new Module("Alcatel 3x", user, null);
             repositorym.saveAndFlush(module2);
             Module module3 = new Module("Wiko Wim LITE", user, null);
             repositorym.saveAndFlush(module3);*/
+            VaadinServletService.getCurrentRequest().getWrappedSession().setAttribute("utilisateur",user);
+            VaadinServletService.getCurrentRequest().getWrappedSession().setAttribute("usernames",username);
+            VaadinServletService.getCurrentRequest().getWrappedSession().setAttribute("passwords",password);
            usernames=username;
            passwords=password;
            utilisateur=user;
@@ -141,6 +115,7 @@ horizontal.addComponents(button,inscription);
             VerticalLayout layout = new VerticalLayout();
             MenuBar mainMenuBar = new MenuBar();
             VerticalLayout content = new VerticalLayout();
+            content.setStyleName("content");
             layout.setSizeFull();
             setContent(layout);
 
@@ -249,7 +224,7 @@ horizontal.addComponents(button,inscription);
             layout.setExpandRatio(footer,0.2f);
             Resource res = new ThemeResource("images/survolusico2.png");
             Image image = new Image(null, res);
-            image.setHeight("40px");
+            image.setHeight("50px");
             image.setWidth("200px");
             header.addComponent(image);
 
@@ -265,35 +240,9 @@ horizontal.addComponents(button,inscription);
             deco.setStyleName("deco");
             deco.addClickListener(new Button.ClickListener() {
                 public void buttonClick(Button.ClickEvent event) {
-
-               /*     HorizontalLayout horizontal = new HorizontalLayout();
-                     VerticalLayout layout1 = new VerticalLayout();
-                    Image image = new Image("",resource);
-                    image.setHeight("200px");
-                    image.setWidth("200px");
-                    final TextField name = new TextField();
-                    name.setCaption("Type your login here:");
-                    final TextField password = new TextField();
-                    password.setCaption("Type your password here:");
-                    final Button inscription = new Button();
-                    inscription.setCaption("Inscription");
-                    inscription.setIcon(VaadinIcons.USERS);
-                    inscription.addClickListener( e -> {
-                        UI.getCurrent().setContent(new Inscription(repositoryu));
-                    });
-                    Button button = new Button("Connect");
-                    button.addClickListener( e -> {
-                        layout1.addComponent(new Label("Trying to connect user : " + name.getValue()));
-                        try {
-                            authenticate(name.getValue(),password.getValue());
-                        } catch (Exception e1) {
-                            e1.printStackTrace(); } });
-                    horizontal.addComponents(button,inscription);
-                    layout1.addComponents(image,name,password, horizontal);
-                    layout1.setComponentAlignment(image,Alignment.MIDDLE_CENTER);
-                    layout1.setComponentAlignment(name, Alignment.MIDDLE_CENTER);
-                    layout1.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
-                    layout1.setComponentAlignment(horizontal, Alignment.MIDDLE_CENTER);*/
+                    VaadinService.getCurrentRequest().getWrappedSession().removeAttribute("usernames");
+                    VaadinService.getCurrentRequest().getWrappedSession().removeAttribute("passwords");
+                    VaadinService.getCurrentRequest().getWrappedSession().removeAttribute("utilisateur");
                     UI.getCurrent().setContent(getLogin());
                 }
             });
@@ -302,6 +251,155 @@ horizontal.addComponents(button,inscription);
             header.setExpandRatio(déconexion, 0.2f);
 
         }
+    }
+    public void refresh(){
+
+       // VaadinServletService.getCurrentServletRequest().getSession().getAttribute("utilisateur");
+       // VaadinServletService.getCurrentServletRequest().getSession().getAttribute("usernames");
+       // VaadinServletService.getCurrentServletRequest().getSession().getAttribute("passwords");
+        usernames= (String)VaadinService.getCurrentRequest().getWrappedSession().getAttribute("usernames");
+        passwords= (String) VaadinService.getCurrentRequest().getWrappedSession().getAttribute("passwords");
+        utilisateur= (Utilisateur) VaadinService.getCurrentRequest().getWrappedSession().getAttribute("utilisateur");
+
+        getUI().setContent(new Label("2 view"));
+        this.setSizeFull();
+        VerticalLayout layout = new VerticalLayout();
+        MenuBar mainMenuBar = new MenuBar();
+        VerticalLayout content = new VerticalLayout();
+        content.setStyleName("content");
+        layout.setSizeFull();
+        setContent(layout);
+
+
+        MenuBar.Command mycommandprofile = new MenuBar.Command() {
+            @Override
+            public void menuSelected(MenuBar.MenuItem selectedItem) {
+                content.removeAllComponents();
+                content.addComponent(new Label(selectedItem.getText()    ));
+                content.getComponent(0).setStyleName("top");
+                ProfileLayout profileLayout =new ProfileLayout();
+                profileLayout.init(repositoryu.findAllByLoginAndPassword(usernames,passwords));
+                content.addComponent(profileLayout);
+                for (MenuBar.MenuItem item: mainMenuBar.getItems()) {
+                    item.setStyleName("none");
+                }
+                selectedItem.setStyleName("highlight");
+            }
+        };
+
+        MenuBar.Command mycommandmodule = new MenuBar.Command() {
+            @Override
+            public void menuSelected(MenuBar.MenuItem selectedItem) {
+                content.removeAllComponents();
+                content.addComponent(new Label(selectedItem.getText()));
+                content.getComponent(0).setStyleName("top");
+                ModuleLayout moduleLayout = new ModuleLayout();
+                moduleLayout.init(repositorym.findByUtilisateur(utilisateur),repositorym,utilisateur);
+                content.addComponent(moduleLayout);
+                for (MenuBar.MenuItem item: mainMenuBar.getItems()) {
+                    item.setStyleName("none");
+                }
+                selectedItem.setStyleName("highlight");
+            }
+        };
+
+        MenuBar.Command mycommandhistorique = new MenuBar.Command() {
+            @Override
+            public void menuSelected(MenuBar.MenuItem selectedItem) {
+                content.removeAllComponents();
+                content.addComponent(new Label(selectedItem.getText()));
+                content.getComponent(0).setStyleName("top");
+                HistoriqueLayout historiqueLayout= new HistoriqueLayout();
+                historiqueLayout.init(repositorym.findByUtilisateur(repositoryu.findAllByLoginAndPassword(usernames,passwords).get(0)),repositoryt);
+                content.addComponent(historiqueLayout);
+                for (MenuBar.MenuItem item: mainMenuBar.getItems()) {
+                    item.setStyleName("none");
+                }
+                selectedItem.setStyleName("highlight");
+            }
+        };
+        MenuBar.Command mycommandGPS = new MenuBar.Command() {
+            @Override
+            public void menuSelected(MenuBar.MenuItem selectedItem) {
+                content.removeAllComponents();
+                content.addComponent(new Label(selectedItem.getText()    ));
+                content.getComponent(0).setStyleName("top");
+                GPSLayout gpsLayout = new GPSLayout();
+                gpsLayout.init(repositorym.findByUtilisateur(repositoryu.findAllByLoginAndPassword(usernames,passwords).get(0)),repositoryt);
+                content.addComponent(gpsLayout);
+
+                for (MenuBar.MenuItem item: mainMenuBar.getItems()) {
+                    item.setStyleName("none");
+                }
+                selectedItem.setStyleName("highlight");
+            }
+        };
+        mainMenuBar.addItem("Mon profil",mycommandprofile);
+        mainMenuBar.addItem("Modules", mycommandmodule);
+        mainMenuBar.addItem("Historique",mycommandhistorique);
+        mainMenuBar.addItem("GPS",mycommandGPS);
+
+
+
+//Initial Content
+        HorizontalLayout header = new HorizontalLayout();
+        header.addStyleName("alvin");
+        header.setId("header");
+        header.setWidth("100%");
+        header.setHeight("80px");
+        layout.addComponent(header);
+        content.removeAllComponents();
+        content.addComponent(new Label("Mon profil"   ));
+        content.getComponent(0).setStyleName("top");
+        ProfileLayout profileLayout =new ProfileLayout();
+        profileLayout.init(repositoryu.findAllByLoginAndPassword(usernames,passwords));
+        content.addComponent(profileLayout);
+        for (MenuBar.MenuItem item: mainMenuBar.getItems()) {
+            item.setStyleName("none");
+        }
+        mainMenuBar.getItems().get(0).setStyleName("highlight");
+//inital content end
+        layout.addComponent(content);
+        layout.setExpandRatio(content,0.8f);
+        HorizontalLayout footer = new HorizontalLayout();
+        footer.setStyleName("footer");
+        footer.setSizeFull();
+           /* Resource resf = new ThemeResource("images/survolusico.png");
+            Image imagef= new Image("",resf);
+            imagef.setHeight("80px");
+            imagef.setWidth("80px");
+            footer.addComponent(imagef);
+            footer.setExpandRatio(imagef,0.1f);*/
+        footer.addComponent(new Label("© 2018 Survolus co. All rights reserved."));
+        layout.addComponent(footer);
+        layout.setExpandRatio(footer,0.2f);
+        Resource res = new ThemeResource("images/survolusico2.png");
+        Image image = new Image(null, res);
+        image.setHeight("50px");
+        image.setWidth("200px");
+        header.addComponent(image);
+
+        // menu principal
+        header.addComponent(mainMenuBar);
+        header.setExpandRatio(mainMenuBar, 0.8f);
+        HorizontalLayout déconexion = new HorizontalLayout();
+        déconexion.setSizeFull();
+        déconexion.setStyleName("deconexion");
+
+        Button deco = new Button();
+        deco.setIcon(VaadinIcons.SIGN_OUT);
+        deco.setStyleName("deco");
+        deco.addClickListener(new Button.ClickListener() {
+            public void buttonClick(Button.ClickEvent event) {
+                VaadinService.getCurrentRequest().getWrappedSession().removeAttribute("usernames");
+                VaadinService.getCurrentRequest().getWrappedSession().removeAttribute("passwords");
+                VaadinService.getCurrentRequest().getWrappedSession().removeAttribute("utilisateur");
+                UI.getCurrent().setContent(getLogin());
+            }
+        });
+        déconexion.addComponent(deco);
+        header.addComponent(déconexion);
+        header.setExpandRatio(déconexion, 0.2f);
     }
 
     public VerticalLayout getLogin() {

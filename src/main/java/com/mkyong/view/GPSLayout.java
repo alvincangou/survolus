@@ -38,12 +38,14 @@ googleMap.setHeight("600px");
       for (Triggered t : repositoryt.findAllByModule(module)) {
          /* googleMap.addMarker("NOT DRAGGABLE: Iso-Heikkilä", new LatLon(
                   60.450403, 22.230399), false, null);*/
+if ((!t.getLaditude().equals("null"))&&(!t.getLongitude().equals("null"))){
+
 
           googleMap.addMarker(t.getModule().getPhonename() + " Déclanchement " + t.getDate() + "-" + t.getModule().getId(), new LatLon(
                   Double.parseDouble(t.getLaditude()), Double.parseDouble(t.getLongitude())), false, "https://i.imgur.com/vUbslYY.png");
-          Histo histo = new Histo(module.getPhonename(),String.valueOf(t.getDate()),String.valueOf(t.getLaditude()),String.valueOf(t.getLongitude()));
+          Histo histo = new Histo(t.getId(),module.getPhonename(),String.valueOf(t.getDate()),String.valueOf(t.getLaditude()),String.valueOf(t.getLongitude()));
           histos.add(histo);
-
+      }
       }
   }
 
