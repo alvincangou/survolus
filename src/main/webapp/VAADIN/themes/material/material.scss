@@ -272,4 +272,20 @@ $v-included-components: remove($v-included-components, panel);
   .v-verticallayout-content{
     height: 100%;
   }
+
+  .v-verticallayout-accordeContent{
+    text-align:center !important
+  }
+
+  .v-verticallayout-accordeContent {
+    width :100%;
+    background-color:gainsboro;
+  }
+
+  .v-horizontallayout-headaccordeonlayout {
+    width :100%;
+    background-color:orangered;
+    color:white;
+    margin-bottom: -20px;
+  }
 }
