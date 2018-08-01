@@ -254,9 +254,7 @@ refresh();
     }
     public void refresh(){
 
-       // VaadinServletService.getCurrentServletRequest().getSession().getAttribute("utilisateur");
-       // VaadinServletService.getCurrentServletRequest().getSession().getAttribute("usernames");
-       // VaadinServletService.getCurrentServletRequest().getSession().getAttribute("passwords");
+
         usernames= (String)VaadinService.getCurrentRequest().getWrappedSession().getAttribute("usernames");
         passwords= (String) VaadinService.getCurrentRequest().getWrappedSession().getAttribute("passwords");
         utilisateur= (Utilisateur) VaadinService.getCurrentRequest().getWrappedSession().getAttribute("utilisateur");
@@ -364,12 +362,7 @@ refresh();
         HorizontalLayout footer = new HorizontalLayout();
         footer.setStyleName("footer");
         footer.setSizeFull();
-           /* Resource resf = new ThemeResource("images/survolusico.png");
-            Image imagef= new Image("",resf);
-            imagef.setHeight("80px");
-            imagef.setWidth("80px");
-            footer.addComponent(imagef);
-            footer.setExpandRatio(imagef,0.1f);*/
+
         footer.addComponent(new Label("© 2018 Survolus co. All rights reserved."));
         layout.addComponent(footer);
         layout.setExpandRatio(footer,0.2f);
@@ -410,9 +403,9 @@ VerticalLayout verticalLayout = new VerticalLayout();
         image.setHeight("200px");
         image.setWidth("200px");
         final TextField name = new TextField();
-        name.setCaption("Type your login here:");
+        name.setCaption("tapez votre login ici:");
         final PasswordField password = new PasswordField();
-        password.setCaption("Type your password here:");
+        password.setCaption("tapez votre mot de passe ici:");
 
         final Button inscription = new Button();
         inscription.setCaption("Inscription");
@@ -420,9 +413,9 @@ VerticalLayout verticalLayout = new VerticalLayout();
         inscription.addClickListener( e -> {
             UI.getCurrent().setContent(new Inscription(repositoryu));
         });
-        Button button = new Button("Connect");
+        Button button = new Button("connexion");
         button.addClickListener( e -> {
-            verticalLayout.addComponent(new Label("Trying to connect user : " + name.getValue()));
+            verticalLayout.addComponent(new Label("Trying to connext user : " + name.getValue()));
             try {
                 authenticate(name.getValue(),password.getValue());
             } catch (Exception e1) {

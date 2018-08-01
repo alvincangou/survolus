@@ -29,7 +29,7 @@ public class GPSLayout extends VerticalLayout {
       this.setStyleName("GPSprofile");
       this.setSizeFull();
       googleMap = new GoogleMap(apiKey, null, null);
-      googleMap.setCenter(new LatLon(16.2239362, -61.5311338));
+      googleMap.setCenter(new LatLon(43.6, 1.433333));
 googleMap.setSizeFull();
 googleMap.setHeight("600px");
       for (Module module:modules){

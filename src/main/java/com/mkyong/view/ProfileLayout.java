@@ -1,19 +1,23 @@
 package com.mkyong.view;
 
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSS;
 import com.mkyong.model.Utilisateur;
 import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.*;
+import org.vaadin.jouni.animator.Animator;
 
 import java.util.List;
 
 public class ProfileLayout extends Panel {
-
+private Boolean opened;
    private Utilisateur utilisateur;
 
     public ProfileLayout() {
     }
     public void init(List<Utilisateur> utilisateurs){
+        opened=false;
+
         VerticalLayout layoutprofile = new VerticalLayout();
         VerticalLayout box= new VerticalLayout();
         HorizontalLayout boxinfo= new HorizontalLayout();
@@ -48,6 +52,26 @@ public class ProfileLayout extends Panel {
         layoutprofile.setExpandRatio(boxinfo,0.5f);
         this.setSizeFull();
         this.setStyleName("panelprofile");
+
+        HorizontalLayout headaccordeonlayout = new HorizontalLayout();
+        layoutprofile.addComponent(headaccordeonlayout);
+        headaccordeonlayout.addComponent(new Label("headaccordeonlayout"));
+        headaccordeonlayout.setStyleName("headaccordeonlayout");
+            ContentVerticalLayout accordeContent = new ContentVerticalLayout();
+        headaccordeonlayout.addLayoutClickListener(event -> {
+            Notification.show("clicked");
+            if(opened==true) {
+                layoutprofile.removeComponent(layoutprofile.getComponent(layoutprofile.getComponentCount()-1));
+                opened=false;
+            }else {
+                layoutprofile.addComponent(accordeContent);
+                
+                layoutprofile.setComponentAlignment(accordeContent,Alignment.MIDDLE_CENTER);
+                opened=true;
+            }
+
+        });
+
 this.setContent(layoutprofile);
     }
 }
